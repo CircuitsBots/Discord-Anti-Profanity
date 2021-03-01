@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from profanity_check import predict_prob
 
+import config
 from main import Bot
 
 
@@ -16,7 +17,7 @@ class FilterLang(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message) -> None:
         value = predict(message.content)
-        if value > 0.2:
+        if value > config.TOLERANCE:
             await message.delete()
             await message.channel.send(
                 f"{message.author.mention}'s message was deleted.",
