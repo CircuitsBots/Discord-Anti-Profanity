@@ -1,0 +1,3 @@
+TOKEN = "Your bots token"
+PREFIX = "Your bots prefix"
+TOLERANCE = 0.2  # 0 means no profanity, 1 means extreamly profane. I like 0.2 the most
