@@ -16,11 +16,12 @@ class FilterLang(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message) -> None:
-        value = predict(message.content)
+        content = message.content.casefold().strip().replace("\u200b", "")
+        value = predict(content)
         if value > config.TOLERANCE:
             await message.delete()
             await message.channel.send(
-                f"{message.author.mention}'s message was deleted.",
+                f"{message.author.mention}'s message was deleted. ({value})",
                 delete_after=5
             )
             self.bot.offenses.setdefault(message.author.id, 0)
